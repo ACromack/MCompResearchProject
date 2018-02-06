@@ -6,7 +6,7 @@ public class CraterMaker : MonoBehaviour {
 
     private TerrainData tData;
     private float[,] saved;
-    float[,] areaT;
+    //float[,] areaT;
     public Texture2D craterTex;
     int xRes, yRes;
     Color[] craterData;
@@ -44,13 +44,13 @@ public class CraterMaker : MonoBehaviour {
             x = Mathf.Clamp(x, craterTex.width / 2, xRes - craterTex.width / 2);
             z = Mathf.Clamp(z, craterTex.height / 2, yRes - craterTex.height / 2);
 
-            areaT = tData.GetHeights(x - craterTex.width / 2, z - craterTex.height / 2, craterTex.width, craterTex.height);
+            float[,] areaT = tData.GetHeights(x - craterTex.width / 2, z - craterTex.height / 2, craterTex.width, craterTex.height);
 
             for (int i = 0; i < craterTex.height; i++)
             {
                 for(int j = 0; j < craterTex.width; j++)
                 {
-                    areaT [i,j] = areaT[i, j] - craterData[i * craterTex.width + j].a;
+                    areaT [i,j] = areaT[i, j] - craterData[i * craterTex.width + j].a * 0.01f;
                     Debug.Log("Crater Negative : " + areaT[i, j]);
                 }
             }
@@ -58,6 +58,31 @@ public class CraterMaker : MonoBehaviour {
             tData.SetHeights(x - craterTex.width / 2, z - craterTex.height / 2, areaT);
 
         }
-	}
+
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            int x = Mathf.RoundToInt(Mathf.Lerp(0, xRes, Mathf.InverseLerp(0, tData.size.x, Mouse.mousePos.x)));
+            int z = Mathf.RoundToInt(Mathf.Lerp(0, xRes, Mathf.InverseLerp(0, tData.size.z, Mouse.mousePos.z)));
+
+            x = Mathf.Clamp(x, craterTex.width / 2, xRes - craterTex.width / 2);
+            z = Mathf.Clamp(z, craterTex.height / 2, yRes - craterTex.height / 2);
+
+            float[,] areaT = tData.GetHeights(x - craterTex.width / 2, z - craterTex.height / 2, craterTex.width, craterTex.height);
+
+            for (int i = 0; i < craterTex.height; i++)
+            {
+                for (int j = 0; j < craterTex.width; j++)
+                {
+                    areaT[i, j] = areaT[i, j] + craterData[i * craterTex.width + j].a * 0.01f;
+                    Debug.Log("Crater Negative : " + areaT[i, j]);
+                }
+            }
+
+            tData.SetHeights(x - craterTex.width / 2, z - craterTex.height / 2, areaT);
+
+        }
+
+    }
 
 }

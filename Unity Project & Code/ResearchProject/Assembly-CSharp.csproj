@@ -68,12 +68,16 @@
      <Compile Include="Assets\Scripts\CoinController.cs" />
      <Compile Include="Assets\Scripts\CraterMaker.cs" />
      <Compile Include="Assets\Scripts\Cursor.cs" />
+     <Compile Include="Assets\Scripts\DungeonCamera.cs" />
      <Compile Include="Assets\Scripts\EnemyController.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\HudManager.cs" />
      <Compile Include="Assets\Scripts\Mouse.cs" />
+     <Compile Include="Assets\Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
      <Compile Include="Assets\Scripts\TextureChanger.cs" />
+     <Compile Include="Assets\Scripts\ThirdPersonCamera.cs" />
+     <Compile Include="Assets\Scripts\ThirdPersonController.cs" />
      <None Include="Assets\DeformableTerrain\Standard Assets\Detonator\Resources\Detonator\Textures\HeatDistort.shader" />
      <None Include="Assets\Fonts\OFL.txt" />
  <Reference Include="UnityEngine.UI">

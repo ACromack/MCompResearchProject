@@ -38,7 +38,7 @@ public class TextureChanger : MonoBehaviour
             int b = Mathf.RoundToInt(Mathf.Lerp(0, yRes, Mathf.InverseLerp(0, tData.size.z, Mouse.mousePos.z)));
             g = Mathf.Clamp(g, craterTex.width / 2, xRes - craterTex.width / 2);
             b = Mathf.Clamp(b, craterTex.height / 2, yRes - craterTex.height / 2);
-            var area = tData.GetAlphamaps(g - craterTex.width / 2, b - craterTex.height / 2, craterTex.width, craterTex.height);
+            float[,,] area = tData.GetAlphamaps(g - craterTex.width / 2, b - craterTex.height / 2, craterTex.width, craterTex.height);
             for (int x = 0; x < craterTex.height; x++)
             {
                 for (int y = 0; y < craterTex.width; y++)

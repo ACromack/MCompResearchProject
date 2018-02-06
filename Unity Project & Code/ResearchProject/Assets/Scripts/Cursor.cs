@@ -19,7 +19,7 @@ public class Cursor : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            //Instantiate(explosion, transform.position, Quaternion.identity);
+            Instantiate(explosion, transform.position, Quaternion.identity);
             
         }
     }
