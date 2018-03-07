@@ -24,11 +24,14 @@ public class LevelClear : MonoBehaviour {
             if(SceneManager.GetActiveScene().name == "Demo Level")
             {
                 CraterMaker.done = true;
+                TextureChanger.texDone = true;
                 SceneManager.LoadScene("Demo Level 2");
             }
             else if(SceneManager.GetActiveScene().name == "Demo Level 2")
             {
-                //SceneManager.LoadScene("Demo Level");
+                CraterMaker.done = true;
+                TextureChanger.texDone = true;
+                SceneManager.LoadScene("Demo Level");
             }
         }
 

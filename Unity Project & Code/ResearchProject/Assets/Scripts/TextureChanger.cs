@@ -9,7 +9,7 @@ public class TextureChanger : MonoBehaviour
     public Texture2D craterTex;
     public int xRes, yRes, layers;
     Color[] craterData;
-
+    static public bool texDone = false;
 
     // Use this for initialization
     void Start ()
@@ -32,7 +32,14 @@ public class TextureChanger : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        if (Input.GetMouseButtonDown(0))
+        if(texDone == true)
+        {
+            //Reset the texture of the terrain back to it's original state
+            tData.SetAlphamaps(0, 0, saved);
+            texDone = false;
+        }
+
+        if (Input.GetMouseButton(0))
         {
             int g = Mathf.RoundToInt(Mathf.Lerp(0, xRes, Mathf.InverseLerp(0, tData.size.x, Player.currentPosition.x)));
             int b = Mathf.RoundToInt(Mathf.Lerp(0, yRes, Mathf.InverseLerp(0, tData.size.z, Player.currentPosition.z)));
