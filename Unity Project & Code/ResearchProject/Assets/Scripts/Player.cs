@@ -1,18 +1,35 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    public float movementSpeed = 10;
-    public float turningSpeed = 60;
+    static public Vector3 currentPosition;
+
+    public float speed = 6.0F;
+    public float jumpSpeed = 8.0F;
+    public float gravity = 20.0F;
+    private Vector3 moveDirection = Vector3.zero;
 
     void Update()
     {
-        float horizontal = Input.GetAxis("Horizontal") * turningSpeed * Time.deltaTime;
-        transform.Rotate(0, horizontal, 0);
+        CharacterController controller = GetComponent<CharacterController>();
+        if (controller.isGrounded)
+        {
+            moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            moveDirection = transform.TransformDirection(moveDirection);
+            moveDirection *= speed;
+            // Retrieve the current position of the player, for terrain deformation purposes
+            currentPosition = transform.position;
+            if (Input.GetButton("Jump"))
+                moveDirection.y = jumpSpeed;
 
-        float vertical = Input.GetAxis("Vertical") * movementSpeed * Time.deltaTime;
-        transform.Translate(0, 0, vertical);
+        }
+        moveDirection.y -= gravity * Time.deltaTime; // Continually applies gravity to the player, even when the terrain has been deformed
+        controller.Move(moveDirection * Time.deltaTime); // Move the player
+
+        // Retrieve the current position of the player, for terrain deformation purposes
+        //currentPosition = transform.position;
     }
 }
