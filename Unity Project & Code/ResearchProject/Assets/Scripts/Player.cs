@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class Player : MonoBehaviour
     public float jumpSpeed = 8.0F;
     public float gravity = 20.0F;
     private Vector3 moveDirection = Vector3.zero;
+    public TextureChanger tChange;
+    public CraterMaker cMaker;
 
     void Update()
     {
@@ -31,5 +34,55 @@ public class Player : MonoBehaviour
 
         // Retrieve the current position of the player, for terrain deformation purposes
         //currentPosition = transform.position;
+
+        if (Input.GetKeyDown(KeyCode.RightControl) || Input.GetButton("LevelReset"))
+        {
+            if (SceneManager.GetActiveScene().name == "Demo Level")
+            {
+                CraterMaker.done = true;
+                TextureChanger.texDone = true;
+                tChange.textureReset();
+                cMaker.craterReset();
+                SceneManager.LoadScene("Demo Level");
+            }
+            else if (SceneManager.GetActiveScene().name == "Demo Level 2")
+            {
+                CraterMaker.done = true;
+                TextureChanger.texDone = true;
+                tChange.textureReset();
+                cMaker.craterReset();
+                SceneManager.LoadScene("Demo Level 2");
+            }
+            else if (SceneManager.GetActiveScene().name == "Demo Level 3")
+            {
+                CraterMaker.done = true;
+                TextureChanger.texDone = true;
+                tChange.textureReset();
+                cMaker.craterReset();
+                SceneManager.LoadScene("Demo Level 3");
+            }
+
+
+
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Blocker")
+        {
+            tChange.tdBlocked = true;
+            cMaker.tdBlocked = true;
+        }
+
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Blocker")
+        {
+            tChange.tdBlocked = false;
+            cMaker.tdBlocked = false;
+        }
     }
 }

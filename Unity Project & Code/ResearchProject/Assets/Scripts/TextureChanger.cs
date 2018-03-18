@@ -10,6 +10,8 @@ public class TextureChanger : MonoBehaviour
     public int xRes, yRes, layers;
     Color[] craterData;
     static public bool texDone = false;
+    public CraterMaker craterMkrObj;
+    public bool tdBlocked = false;
 
     // Use this for initialization
     void Start ()
@@ -39,32 +41,44 @@ public class TextureChanger : MonoBehaviour
             texDone = false;
         }
 
-        if (Input.GetMouseButton(0))
+        if(craterMkrObj.currentDeformUsage > 0 && tdBlocked == false)
         {
-            int g = Mathf.RoundToInt(Mathf.Lerp(0, xRes, Mathf.InverseLerp(0, tData.size.x, Player.currentPosition.x)));
-            int b = Mathf.RoundToInt(Mathf.Lerp(0, yRes, Mathf.InverseLerp(0, tData.size.z, Player.currentPosition.z)));
-            g = Mathf.Clamp(g, craterTex.width / 2, xRes - craterTex.width / 2);
-            b = Mathf.Clamp(b, craterTex.height / 2, yRes - craterTex.height / 2);
-            float[,,] area = tData.GetAlphamaps(g - craterTex.width / 2, b - craterTex.height / 2, craterTex.width, craterTex.height);
-            for (int x = 0; x < craterTex.height; x++)
+            if (Input.GetKey(KeyCode.Q) || Input.GetAxis("Fire1") > 0)
             {
-                for (int y = 0; y < craterTex.width; y++)
+                int g = Mathf.RoundToInt(Mathf.Lerp(0, xRes, Mathf.InverseLerp(0, tData.size.x, Player.currentPosition.x)));
+                int b = Mathf.RoundToInt(Mathf.Lerp(0, yRes, Mathf.InverseLerp(0, tData.size.z, Player.currentPosition.z)));
+                g = Mathf.Clamp(g, craterTex.width / 2, xRes - craterTex.width / 2);
+                b = Mathf.Clamp(b, craterTex.height / 2, yRes - craterTex.height / 2);
+                float[,,] area = tData.GetAlphamaps(g - craterTex.width / 2, b - craterTex.height / 2, craterTex.width, craterTex.height);
+                for (int x = 0; x < craterTex.height; x++)
                 {
-                    for (int z = 0; z < layers; z++)
+                    for (int y = 0; y < craterTex.width; y++)
                     {
-                        if (z == 1)
+                        for (int z = 0; z < layers; z++)
                         {
-                            area[x, y, z] += craterData[x * craterTex.width + y].a;
-                        }
-                        else
-                        {
-                            area[x, y, z] -= craterData[x * craterTex.width + y].a;
+                            if (z == 1)
+                            {
+                                area[x, y, z] += craterData[x * craterTex.width + y].a;
+                            }
+                            else
+                            {
+                                area[x, y, z] -= craterData[x * craterTex.width + y].a;
+                            }
                         }
                     }
                 }
+                tData.SetAlphamaps(g - craterTex.width / 2, b - craterTex.height / 2, area);
             }
-            tData.SetAlphamaps(g - craterTex.width / 2, b - craterTex.height / 2, area);
         }
+
     }
 
+
+    // Function to call when resetting the level
+    public void textureReset()
+    {
+        //Reset the texture of the terrain back to it's original state
+        tData.SetAlphamaps(0, 0, saved);
+        texDone = false;
+    }
 }

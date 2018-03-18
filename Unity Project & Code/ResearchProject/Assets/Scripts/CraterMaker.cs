@@ -13,6 +13,7 @@ public class CraterMaker : MonoBehaviour {
     int test;
     Color[] craterData;
     static public bool done = false;
+    public bool tdBlocked = false;
 
     public int startingDeformUsage = 100;
     public int currentDeformUsage;
@@ -56,65 +57,76 @@ public class CraterMaker : MonoBehaviour {
             done = false;
         }
 
-		if(Input.GetMouseButton(0))
+        if(currentDeformUsage > 0 && tdBlocked == false)
         {
-            //int x = Mathf.RoundToInt(Mathf.Lerp(0, xRes, Mathf.InverseLerp(0, tData.size.x, Mouse.mousePos.x)));
-            //int z = Mathf.RoundToInt(Mathf.Lerp(0, xRes, Mathf.InverseLerp(0, tData.size.z, Mouse.mousePos.z)));
-            int x = Mathf.RoundToInt(Mathf.Lerp(0, xRes, Mathf.InverseLerp(0, tData.size.x, Player.currentPosition.x)));
-            int z = Mathf.RoundToInt(Mathf.Lerp(0, xRes, Mathf.InverseLerp(0, tData.size.z, Player.currentPosition.z)));
-
-            x = Mathf.Clamp(x, craterTex.width / 2, xRes - craterTex.width / 2);
-            z = Mathf.Clamp(z, craterTex.height / 2, yRes - craterTex.height / 2);
-
-            float[,] areaT = tData.GetHeights(x - craterTex.width / 2, z - craterTex.height / 2, craterTex.width, craterTex.height);
-
-            for (int i = 0; i < craterTex.height; i++)
+            if (Input.GetKey(KeyCode.Q) || Input.GetAxis("Fire1") > 0)
             {
-                for(int j = 0; j < craterTex.width; j++)
+                //int x = Mathf.RoundToInt(Mathf.Lerp(0, xRes, Mathf.InverseLerp(0, tData.size.x, Mouse.mousePos.x)));
+                //int z = Mathf.RoundToInt(Mathf.Lerp(0, xRes, Mathf.InverseLerp(0, tData.size.z, Mouse.mousePos.z)));
+                int x = Mathf.RoundToInt(Mathf.Lerp(0, xRes, Mathf.InverseLerp(0, tData.size.x, Player.currentPosition.x)));
+                int z = Mathf.RoundToInt(Mathf.Lerp(0, xRes, Mathf.InverseLerp(0, tData.size.z, Player.currentPosition.z)));
+
+                x = Mathf.Clamp(x, craterTex.width / 2, xRes - craterTex.width / 2);
+                z = Mathf.Clamp(z, craterTex.height / 2, yRes - craterTex.height / 2);
+
+                float[,] areaT = tData.GetHeights(x - craterTex.width / 2, z - craterTex.height / 2, craterTex.width, craterTex.height);
+
+                for (int i = 0; i < craterTex.height; i++)
                 {
-                    areaT [i,j] = areaT[i, j] - craterData[i * craterTex.width + j].a * 0.0005f;
-                    //Debug.Log("Crater Negative : " + areaT[i, j]);
-                    //Debug.Log("Crater X : " + x + " | Crater Y : " + z);
+                    for (int j = 0; j < craterTex.width; j++)
+                    {
+                        areaT[i, j] = areaT[i, j] - craterData[i * craterTex.width + j].a * 0.0005f;
+                        //Debug.Log("Crater Negative : " + areaT[i, j]);
+                        //Debug.Log("Crater X : " + x + " | Crater Y : " + z);
+                    }
                 }
+
+                tData.SetHeights(x - craterTex.width / 2, z - craterTex.height / 2, areaT);
+                //tData.SetHeights(x - craterTex.width / 2, z - 1, areaT);
+
+                //test++;
+                //Debug.Log("Test Int : " + test);
+                currentDeformUsage--;
+                deformUseSlider.value = currentDeformUsage;
             }
 
-           tData.SetHeights(x - craterTex.width / 2, z - craterTex.height / 2, areaT);
-            //tData.SetHeights(x - craterTex.width / 2, z - 1, areaT);
 
-            //test++;
-            //Debug.Log("Test Int : " + test);
-            currentDeformUsage--;
-            deformUseSlider.value = currentDeformUsage;
+            if (Input.GetKey(KeyCode.E) || Input.GetAxis("Fire2") < 0)
+            {
+                //int x = Mathf.RoundToInt(Mathf.Lerp(0, xRes, Mathf.InverseLerp(0, tData.size.x, Mouse.mousePos.x)));
+                //int z = Mathf.RoundToInt(Mathf.Lerp(0, xRes, Mathf.InverseLerp(0, tData.size.z, Mouse.mousePos.z)));
+                int x = Mathf.RoundToInt(Mathf.Lerp(0, xRes, Mathf.InverseLerp(0, tData.size.x, Player.currentPosition.x)));
+                int z = Mathf.RoundToInt(Mathf.Lerp(0, xRes, Mathf.InverseLerp(0, tData.size.z, Player.currentPosition.z)));
+
+                x = Mathf.Clamp(x, craterTex.width / 2, xRes - craterTex.width / 2);
+                z = Mathf.Clamp(z, craterTex.height / 2, yRes - craterTex.height / 2);
+
+                float[,] areaT = tData.GetHeights(x - craterTex.width / 2, z - craterTex.height / 2, craterTex.width, craterTex.height);
+
+                for (int i = 0; i < craterTex.height; i++)
+                {
+                    for (int j = 0; j < craterTex.width; j++)
+                    {
+                        areaT[i, j] = areaT[i, j] + craterData[i * craterTex.width + j].a * 0.0005f;
+                        //Debug.Log("Crater Negative : " + areaT[i, j]);
+                    }
+                }
+
+                tData.SetHeights(x - craterTex.width / 2, z - craterTex.height / 2, areaT);
+
+                currentDeformUsage--;
+                deformUseSlider.value = currentDeformUsage;
+            }
         }
 
 
-        if (Input.GetMouseButton(1))
-        {
-            //int x = Mathf.RoundToInt(Mathf.Lerp(0, xRes, Mathf.InverseLerp(0, tData.size.x, Mouse.mousePos.x)));
-            //int z = Mathf.RoundToInt(Mathf.Lerp(0, xRes, Mathf.InverseLerp(0, tData.size.z, Mouse.mousePos.z)));
-            int x = Mathf.RoundToInt(Mathf.Lerp(0, xRes, Mathf.InverseLerp(0, tData.size.x, Player.currentPosition.x)));
-            int z = Mathf.RoundToInt(Mathf.Lerp(0, xRes, Mathf.InverseLerp(0, tData.size.z, Player.currentPosition.z)));
-
-            x = Mathf.Clamp(x, craterTex.width / 2, xRes - craterTex.width / 2);
-            z = Mathf.Clamp(z, craterTex.height / 2, yRes - craterTex.height / 2);
-
-            float[,] areaT = tData.GetHeights(x - craterTex.width / 2, z - craterTex.height / 2, craterTex.width, craterTex.height);
-
-            for (int i = 0; i < craterTex.height; i++)
-            {
-                for (int j = 0; j < craterTex.width; j++)
-                {
-                    areaT[i, j] = areaT[i, j] + craterData[i * craterTex.width + j].a * 0.0005f;
-                    //Debug.Log("Crater Negative : " + areaT[i, j]);
-                }
-            }
-
-            tData.SetHeights(x - craterTex.width / 2, z - craterTex.height / 2, areaT);
-
-            currentDeformUsage--;
-            deformUseSlider.value = currentDeformUsage;
-        }
 
     }
 
+    // Function to call when resetting the level
+    public void craterReset()
+    {
+        tData.SetHeights(0, 0, saved);
+        done = false;
+    }
 }

@@ -18,8 +18,20 @@ public class Switch : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Player" && Input.GetButton("SwitchInteract"))
+        {
+            Debug.Log("LEVEL CLEAR");
             OpenPath();
+        }
+    }
+
+    void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Player" && Input.GetButton("SwitchInteract"))
+        {
+            Debug.Log("LEVEL CLEAR");
+            OpenPath();
+        }
     }
 
     void OpenPath()

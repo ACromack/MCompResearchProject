@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class TrackballCamera : MonoBehaviour {
 
-    public float distance = 15f;
+    public float distance = 30.0f;
 
     public float virtualTrackballDistance = 0.25f; // distance of the virtual trackball.
 
     public GameObject target;
     private Vector3? lastMousePosition;
+
+    private Vector3 actualTerrainPosition;
     // Use this for initialization
     void Start()
     {
@@ -18,6 +20,7 @@ public class TrackballCamera : MonoBehaviour {
         position.x += 50;
         position.y += 100;
         position.z += 50;
+        actualTerrainPosition = target.transform.position + new Vector3(50, 100, 50);
         transform.position = position;
         transform.LookAt(target.transform.position + new Vector3(50, 100, 50));
     }
@@ -34,7 +37,7 @@ public class TrackballCamera : MonoBehaviour {
             {
                 // we are moving from here
                 var lastPosn = this.transform.position;
-                var targetPosn = target.transform.position;
+                var targetPosn = actualTerrainPosition;
 
                 // we have traced out this distance on a sphere from lastPosn
                 /*

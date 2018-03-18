@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - SwitchA
   - SwitchB
+  - Blocker
   layers:
   - Default
   - TransparentFX

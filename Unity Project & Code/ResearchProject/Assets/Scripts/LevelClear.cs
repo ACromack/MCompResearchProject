@@ -13,6 +13,7 @@ public class LevelClear : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
+
 	}
 
     void OnTriggerEnter(Collider other)
@@ -28,6 +29,12 @@ public class LevelClear : MonoBehaviour {
                 SceneManager.LoadScene("Demo Level 2");
             }
             else if(SceneManager.GetActiveScene().name == "Demo Level 2")
+            {
+                CraterMaker.done = true;
+                TextureChanger.texDone = true;
+                SceneManager.LoadScene("Demo Level 3");
+            }
+            else if (SceneManager.GetActiveScene().name == "Demo Level 3")
             {
                 CraterMaker.done = true;
                 TextureChanger.texDone = true;
