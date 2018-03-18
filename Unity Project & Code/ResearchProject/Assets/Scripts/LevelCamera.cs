@@ -36,7 +36,7 @@ public class LevelCamera : MonoBehaviour {
 
     void Update()
     {
-
+        // Check for user rotating the camera left or right
         if (Input.GetKey(KeyCode.RightShift) || Input.GetButton("LeftH"))
         {
             var rot = Quaternion.AngleAxis(this.Speed * Time.deltaTime, this.Axis);
@@ -56,6 +56,17 @@ public class LevelCamera : MonoBehaviour {
         else
         {
             this.transform.LookAt(target.transform.position + new Vector3(50, 0, 50));
+        }
+
+        // Check for the player zooming the camera
+        if(Input.GetButton("ZoomIn"))
+        {
+            Camera.main.fieldOfView -= 1.0f;
+            
+        }
+        else if(Input.GetButton("ZoomOut"))
+        {
+            Camera.main.fieldOfView += 1.0f;
         }
 
     }

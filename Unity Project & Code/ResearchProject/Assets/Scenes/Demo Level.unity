@@ -775,7 +775,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PointToRotateAround: {x: 0, y: 0, z: 0}
   Axis: {x: 0, y: 1, z: 0}
-  Speed: 40
+  Speed: 100
   target: {fileID: 1059827016}
 --- !u!114 &1482677698
 MonoBehaviour:
