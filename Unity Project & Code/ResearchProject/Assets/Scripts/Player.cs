@@ -61,6 +61,14 @@ public class Player : MonoBehaviour
                 cMaker.craterReset();
                 SceneManager.LoadScene("Demo Level 3");
             }
+            else if (SceneManager.GetActiveScene().name == "Level 1")
+            {
+                CraterMaker.done = true;
+                TextureChanger.texDone = true;
+                tChange.textureReset();
+                cMaker.craterReset();
+                SceneManager.LoadScene("Level 1");
+            }
 
 
 

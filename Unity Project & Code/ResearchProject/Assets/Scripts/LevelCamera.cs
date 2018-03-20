@@ -4,34 +4,16 @@ using UnityEngine;
 
 public class LevelCamera : MonoBehaviour {
 
-    //   public GameObject target;
-    //   private float speedMod = 0.5f;
-    //   private Vector3 point;
-    //   //private Renderer terrRefRend;
-
-    //// Use this for initialization
-    //void Start () {
-    //       point = target.transform.position;
-    //       point.x += 50;
-    //       point.z += 50;
-    //       //point = target.GetComponent<Renderer>().bounds.center;
-    //       transform.LookAt(point);
-    //}
-
-    //// Update is called once per frame
-    //void Update () {
-    //       transform.RotateAround(point, new Vector3(0.0f, 1.0f, 0.0f), 20 * Time.deltaTime * speedMod);
-    //}
-
     public Vector3 PointToRotateAround = Vector3.zero;
     public Vector3 Axis = Vector3.up;
+    public Vector3 offsetVector;
     public float Speed = 100f;
     public GameObject target;
 
     void Start()
     {
-        this.transform.LookAt(target.transform.position + new Vector3(50, 0, 50));
-        PointToRotateAround = target.transform.position + new Vector3(50, 0, 50);
+        this.transform.LookAt(target.transform.position + offsetVector);
+        PointToRotateAround = target.transform.position + offsetVector;
     }
 
     void Update()
@@ -43,7 +25,7 @@ public class LevelCamera : MonoBehaviour {
             var v = this.transform.position - this.PointToRotateAround;
             v = rot * v;
             this.transform.position = this.PointToRotateAround + v;
-            this.transform.LookAt(target.transform.position + new Vector3(50, 0, 50));
+            this.transform.LookAt(target.transform.position + offsetVector);
         }
         else if (Input.GetKey(KeyCode.LeftShift) || Input.GetButton("RightH"))
         {
@@ -51,11 +33,11 @@ public class LevelCamera : MonoBehaviour {
             var v = this.transform.position - this.PointToRotateAround;
             v = rot * v;
             this.transform.position = this.PointToRotateAround + v;
-            this.transform.LookAt(target.transform.position + new Vector3(50, 0, 50));
+            this.transform.LookAt(target.transform.position + offsetVector);
         }
         else
         {
-            this.transform.LookAt(target.transform.position + new Vector3(50, 0, 50));
+            this.transform.LookAt(target.transform.position + offsetVector);
         }
 
         // Check for the player zooming the camera

@@ -167,7 +167,7 @@ Prefab:
         type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 1b78d787d60325a40923009d5d693dba, type: 2}
+      objectReference: {fileID: 2100000, guid: 7b482f4e37748354883fe003e91f3e74, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f5989b3394a33de418351890ec0f5afc, type: 2}
   m_IsPrefabParent: 0
@@ -189,6 +189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PointToRotateAround: {x: 0, y: 0, z: 0}
   Axis: {x: 0, y: 1, z: 0}
+  offsetVector: {x: 50, y: 0, z: 50}
   Speed: 100
   target: {fileID: 192131317}
 --- !u!1 &175480923
@@ -554,7 +555,7 @@ Prefab:
         type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 1b78d787d60325a40923009d5d693dba, type: 2}
+      objectReference: {fileID: 2100000, guid: 7b482f4e37748354883fe003e91f3e74, type: 2}
     - target: {fileID: 1724092218416742, guid: 6c165fb97b9d8094ebd61c009ef927e3, type: 2}
       propertyPath: m_Name
       value: ConnectPlatform2
@@ -1305,7 +1306,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: cd0860fe643401745b45b1e13fef0bef, type: 2}
+  - {fileID: 2100000, guid: d1b8bcc3e237c63428b2d8698017275a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
