@@ -1,0 +1,19 @@
+3633
+3089
+Level 1 2087 Reset No: 1
+Level 1 5524 Reset No: 1
+Level 1 2673 Reset No: 1
+Level 1 | Runtime(ms): 4572 | Level 1 Reset Increment + 1
+Level 1 | Runtime(ms): 2712 | Level 1 Reset Increment + 1
+Level 1 | Runtime(ms): 1684 | Level 1 Reset Increment + 1
+Level 1 | Runtime(ms): 1057 | Level 1 Reset Increment + 1
+Demo Level 1 | Runtime(ms): 3387 | Times Jumped : 0 | Demo Level 1 Reset Increment + 1
+Demo Level 1 | Runtime(ms): 8556 | Times Jumped : 0 | Demo Level 1 Reset Increment + 1
+Demo Level 1 | Runtime(ms): 1851 | Times Jumped : 0 | Demo Level 1 Reset Increment + 1
+Demo Level 1 | Runtime(ms): 3270 | Times Jumped : 0 | Demo Level 1 Reset Increment + 1
+Demo Level 1 | Runtime(ms): 5892 | Times Jumped : 0 | Demo Level 1 Reset Increment + 1
+Demo Level 1 | Runtime(ms): 2390 | Times Jumped : 0 | Demo Level 1 Reset Increment + 1
+Demo Level 1 | Runtime(ms): 690 | Times Jumped : 0 | Demo Level 1 Reset Increment + 1
+Demo Level 1 | Runtime(ms): 11420 | Times Jumped : 0 | Demo Level 1 Reset Increment + 0
+Demo Level 1 | Runtime(ms): 14692 | Times Jumped : 0 | Demo Level 1 Reset Increment + 0
+Demo Level 1 | Runtime(ms): 10294 | Times Jumped : 5 | Demo Level 1 Reset Increment + 0
