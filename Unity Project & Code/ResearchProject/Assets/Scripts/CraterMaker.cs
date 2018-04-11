@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class CraterMaker : MonoBehaviour {
 
+    // Variables relating to the terrain deformation
     private TerrainData tData;
     private float[,] saved;
     //float[,] areaT;
@@ -15,11 +16,16 @@ public class CraterMaker : MonoBehaviour {
     static public bool done = false;
     public bool tdBlocked = false;
 
+    // Variables relating to the deformation meter
     public int startingDeformUsage = 100;
     public int currentDeformUsage;
     public Slider deformUseSlider;
 
+    // Variables related to logging
+    public int downDeformUsage = 0;
+    public int upDeformUsage = 0;
 
+    // When the script is awakened, reset the deformation usage meter
     void Awake()
     {
         currentDeformUsage = startingDeformUsage;
@@ -51,18 +57,21 @@ public class CraterMaker : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
+        // Check if the level is complete/being reset, then reset the terrain to default and the logged usage of the deformation
         if(done == true)
         {
             tData.SetHeights(0, 0, saved);
+            downDeformUsage = 0;
+            upDeformUsage = 0;
             done = false;
-        }
+}
 
+        // If the terrain deformation usage meter is above 0 and the usage is not blocked, execute the following
         if(currentDeformUsage > 0 && tdBlocked == false)
         {
+            // If the player presses the button to deform the terrain downwards
             if (Input.GetKey(KeyCode.Q) || Input.GetAxis("Fire1") > 0)
             {
-                //int x = Mathf.RoundToInt(Mathf.Lerp(0, xRes, Mathf.InverseLerp(0, tData.size.x, Mouse.mousePos.x)));
-                //int z = Mathf.RoundToInt(Mathf.Lerp(0, xRes, Mathf.InverseLerp(0, tData.size.z, Mouse.mousePos.z)));
                 int x = Mathf.RoundToInt(Mathf.Lerp(0, xRes, Mathf.InverseLerp(0, tData.size.x, Player.currentPosition.x)));
                 int z = Mathf.RoundToInt(Mathf.Lerp(0, xRes, Mathf.InverseLerp(0, tData.size.z, Player.currentPosition.z)));
 
@@ -76,25 +85,23 @@ public class CraterMaker : MonoBehaviour {
                     for (int j = 0; j < craterTex.width; j++)
                     {
                         areaT[i, j] = areaT[i, j] - craterData[i * craterTex.width + j].a * 0.0005f;
-                        //Debug.Log("Crater Negative : " + areaT[i, j]);
-                        //Debug.Log("Crater X : " + x + " | Crater Y : " + z);
                     }
                 }
 
                 tData.SetHeights(x - craterTex.width / 2, z - craterTex.height / 2, areaT);
                 //tData.SetHeights(x - craterTex.width / 2, z - 1, areaT);
 
-                //test++;
-                //Debug.Log("Test Int : " + test);
+                // Update the terrain deformation usage meter
                 currentDeformUsage--;
                 deformUseSlider.value = currentDeformUsage;
+
+                // Log the usage of the downwards deformation
+                downDeformUsage++;
             }
 
-
+            // If the player presses the button to deform the terrain upwards
             if (Input.GetKey(KeyCode.E) || Input.GetAxis("Fire2") < 0)
             {
-                //int x = Mathf.RoundToInt(Mathf.Lerp(0, xRes, Mathf.InverseLerp(0, tData.size.x, Mouse.mousePos.x)));
-                //int z = Mathf.RoundToInt(Mathf.Lerp(0, xRes, Mathf.InverseLerp(0, tData.size.z, Mouse.mousePos.z)));
                 int x = Mathf.RoundToInt(Mathf.Lerp(0, xRes, Mathf.InverseLerp(0, tData.size.x, Player.currentPosition.x)));
                 int z = Mathf.RoundToInt(Mathf.Lerp(0, xRes, Mathf.InverseLerp(0, tData.size.z, Player.currentPosition.z)));
 
@@ -108,14 +115,18 @@ public class CraterMaker : MonoBehaviour {
                     for (int j = 0; j < craterTex.width; j++)
                     {
                         areaT[i, j] = areaT[i, j] + craterData[i * craterTex.width + j].a * 0.0005f;
-                        //Debug.Log("Crater Negative : " + areaT[i, j]);
                     }
                 }
 
+
                 tData.SetHeights(x - craterTex.width / 2, z - craterTex.height / 2, areaT);
 
+                // Update the terrain deformation usage meter
                 currentDeformUsage--;
                 deformUseSlider.value = currentDeformUsage;
+
+                // Log the usage of the upwards deformation
+                upDeformUsage++;
             }
         }
 
