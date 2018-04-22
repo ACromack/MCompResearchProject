@@ -1980,7 +1980,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   craterTex: {fileID: 2800000, guid: 72c26139ab8d91c44a5464cfd82a76dc, type: 3}
   tdBlocked: 0
-  startingDeformUsage: 110
+  startingDeformUsage: 120
   currentDeformUsage: 0
   deformUseSlider: {fileID: 725375648}
   downDeformUsage: 0

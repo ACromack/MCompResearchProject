@@ -1,2 +1,7 @@
 Level 2 | Runtime(ms): 34431 | Times Jumped : 12 | Level 2 Reset Increment + 1 | Upwards Deformation Usage: 41 | Downwards Deformation Usage: 69
 Level 2 | Runtime(ms): 48305 | Times Jumped : 7 | Level 2 Reset Increment + 0 | Upwards Deformation Usage: 65 | Downwards Deformation Usage: 65
+Demo Level 1 | Runtime(ms): 9711 | Times Jumped : 0 | Demo Level 1 Reset Increment + 0 | Upwards Deformation Usage: 84 | Downwards Deformation Usage: 0
+Demo Level 2 | Runtime(ms): 8523 | Times Jumped : 1 | Demo Level 2 Reset Increment + 0 | Upwards Deformation Usage: 0 | Downwards Deformation Usage: 57
+Demo Level 3 | Runtime(ms): 11454 | Times Jumped : 1 | Demo Level 3 Reset Increment + 0 | Upwards Deformation Usage: 71 | Downwards Deformation Usage: 0
+Level 1 | Runtime(ms): 36110 | Times Jumped : 7 | Level 1 Reset Increment + 0 | Upwards Deformation Usage: 56 | Downwards Deformation Usage: 64
+Level 2 | Runtime(ms): 68177 | Times Jumped : 15 | Level 2 Reset Increment + 0 | Upwards Deformation Usage: 55 | Downwards Deformation Usage: 63
