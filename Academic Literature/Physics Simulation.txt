@@ -1,7 +1,0 @@
-* Evolution of Physics in Video Games
-* Alternative Trajectories - Structuring play through videogame physics engines
-* Mind Games - Game Engines as an Architecture for Intuitive Physics
-* Teaching High School Physics with a Serious Game
-* The Usability of a Commercial Game Physics Engine to Develop Physics Educational Materials
-* Soil Deformation Models for Real-Time Simulation
-* Learning Physics with Digital Game Simulations in Middle School Science
